@@ -10,3 +10,10 @@ echo $BASH_VERSION
 echo $HOME
 
 echo $PWD
+
+name=MR Ly
+
+val=10
+
+echo xin chao $name va $val
+
