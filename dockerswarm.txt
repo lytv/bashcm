@@ -14,10 +14,10 @@ Execute the following commands on the nodes that will function as Swarm managers
 
     ufw allow 22/tcp
     ufw allow 2376/tcp
-    ufw allow 2377/tcp
-    ufw allow 7946/tcp
-    ufw allow 7946/udp
-    ufw allow 4789/udp
+sudo    ufw allow 2377/tcp
+sudo    ufw allow 7946/tcp
+sudo    ufw allow 7946/udp
+sudo    ufw allow 4789/udp
 
 Afterwards, reload UFW:
 
@@ -54,3 +54,55 @@ If UFW isn't enabled, enable it:
 Then restart the Docker daemon:
 
 systemctl restart docker
+
+
+kiem tra port dang mo
+
+sudo ufw status verbose
+
+You can find service info as follows:
+
+sudo ufw app list
+
+You need to ensure that the requisite network ports are open between the swarm nodes.
+
+    TCP port 2377 for cluster management communications
+    TCP and UDP port 7946 for communication among nodes
+    UDP port 4789 for overlay network traffic
+
+
+manager
+
+sudo firewall-cmd --add-port=22/tcp --permanent 
+sudo firewall-cmd --add-port=2376/tcp --permanent 
+sudo firewall-cmd --add-port=2377/tcp --permanent 
+sudo firewall-cmd --add-port=7946/tcp --permanent  
+sudo firewall-cmd --add-port=7946/udp --permanent 
+sudo firewall-cmd --add-port=4789/udp --permanent 
+sudo firewall-cmd --reload
+sudo systemctl restart docker 
+
+
+worker
+sudo firewall-cmd --add-port=22/tcp --permanent 
+sudo firewall-cmd --add-port=2376/tcp --permanent 
+sudo firewall-cmd --add-port=7946/tcp --permanent 
+sudo firewall-cmd --add-port=7946/udp --permanent 
+sudo firewall-cmd --add-port=4789/udp --permanent 
+sudo firewall-cmd --reload
+sudo systemctl restart docker 
+
+sudo kill $(sudo lsof -t -i:3000)
+
+in place of 3000 you can specify your port number
+
+sudo netstat -ntlp | grep LISTEN
+
+sudo docker swarm init --advertise-addr=192.169.1.10
+Swarm initialized: current node (ot2qxlt19s6122ydy0bg12d7k) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-4qi8mehtcch3tmdimfdi95dpazlvlqea23jhbg1cscdyk9kbo8-4s7okb3f0hrm1zhv8yr5fw7wh 192.169.1.10:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
