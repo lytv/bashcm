@@ -7,3 +7,50 @@ To add a worker to this swarm, run the following command:
     docker swarm join --token SWMTKN-1-2nskylr59ey6e584ewwxkxuc4u19f041o49fsvk3sucf4sv7x6-34e4ec6mu6mtlabn9u8lqyivk 192.169.1.10:2377
 
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+open port for manager
+
+Execute the following commands on the nodes that will function as Swarm managers:
+
+    ufw allow 22/tcp
+    ufw allow 2376/tcp
+    ufw allow 2377/tcp
+    ufw allow 7946/tcp
+    ufw allow 7946/udp
+    ufw allow 4789/udp
+
+Afterwards, reload UFW:
+
+    ufw reload
+
+If UFW isn't enabled, do so with the following command:
+
+    ufw enable
+
+This might not be necessary, but it never hurts to restart the Docker daemon anytime you make changes to and restart the firewall:
+
+systemctl restart docker
+
+
+open port for worker
+
+
+Then on each node that will function as a worker, execute the following commands:
+
+    ufw allow 22/tcp
+    ufw allow 2376/tcp
+    ufw allow 7946/tcp 
+    ufw allow 7946/udp 
+    ufw allow 4789/udp 
+
+Afterwards, reload UFW:
+
+    ufw reload
+
+If UFW isn't enabled, enable it:
+
+    ufw enable
+
+Then restart the Docker daemon:
+
+systemctl restart docker
