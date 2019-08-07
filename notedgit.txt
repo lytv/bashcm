@@ -3,3 +3,10 @@ $ git config --global credential.helper cache
 
 $ git config --global credential.helper 'cache --timeout=3600'
 # Set the cache to timeout after one hour (setting is in seconds)
+
+# show ip all
+ip add
+
+# in noi dung dong len ra file
+
+echo $(ip add >> text.txt)
