@@ -98,7 +98,7 @@ in place of 3000 you can specify your port number
 
 sudo netstat -ntlp | grep LISTEN
 
-sudo docker swarm init --advertise-addr=192.169.1.10
+sudo docker swarm init --advertise-addr=192.168.1.10
 Swarm initialized: current node (ot2qxlt19s6122ydy0bg12d7k) is now a manager.
 
 To add a worker to this swarm, run the following command:
@@ -106,3 +106,6 @@ To add a worker to this swarm, run the following command:
     docker swarm join --token SWMTKN-1-4qi8mehtcch3tmdimfdi95dpazlvlqea23jhbg1cscdyk9kbo8-4s7okb3f0hrm1zhv8yr5fw7wh 192.169.1.10:2377
 
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+
+$ VBoxManage startvm OracleLinux6Test
